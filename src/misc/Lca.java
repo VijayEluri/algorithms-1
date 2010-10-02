@@ -7,10 +7,17 @@ public class Lca {
 	int findLcaInternal(Node root, Node left, Node right) {
 		if (root == null)
 			return 2;  //2 -> both left and right missing under tree rooted at root
-		
+
 		if (root == left || root == right) {
-			lca = root;
-			return 0;  //0 -> lca has been found
+			int l = findLcaInternal(root.left, left, right);
+			if (l == 0) {
+				int r = findLcaInternal(root.right, left, right);
+				if (r == 0) return 1;
+				else { lca = root; return 0; }  // r == 1
+			} else { // l == 1
+				lca = root;
+				return 0;
+			}
 		}
 		
 		int l = findLcaInternal(root.left, left, right);
