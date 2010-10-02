@@ -1,4 +1,4 @@
-package src.tc.srm144;
+package tc.srm144;
 
 // 500 points div-2
 
@@ -21,7 +21,7 @@ public class BinaryCode {
 	
 	private String decode(char[] Q, char[] P) {
 		if (Q.length == 1) 
-			if (Q[0] == '3' || Q[0] == '2')
+			if (Q[0] > '1' )
 				return "NONE";
 			else if (Q[0] == '0' && P[0] == '1')
 				return "NONE";
