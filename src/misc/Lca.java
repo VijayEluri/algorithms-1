@@ -40,6 +40,6 @@ public class Lca {
         if (result == 0)
             return lca;
         else
-            return null;
+          return null;
     }
 }
