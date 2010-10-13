@@ -23,7 +23,7 @@ public class Lca {
         int l = findLcaInternal(root.left, left, right);
         if (l == 0) return 0;
         int r = findLcaInternal(root.right, left, right);
-        if (l == 1) {  //1 -> either left or right node has been found under tree rooted at root.
+        if (l == 1) {  //1 -> either left or right node has been found under tree rooted at root
             if (r == 2) return 1;
             if (r == 1) {
                 lca = root;
