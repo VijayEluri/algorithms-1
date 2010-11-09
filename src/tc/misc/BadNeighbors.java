@@ -4,7 +4,7 @@ package tc.misc;
 
 public class BadNeighbors {
     int [][] s;
-    boolean [][] includesFirst;
+    boolean [] includesFirst;
 
     public static void main(String[] _) {
         System.out.println(new BadNeighbors().maxDonations(new int[]{ 10, 3, 2, 5, 7, 8 }));
@@ -21,32 +21,32 @@ public class BadNeighbors {
     public int maxDonations(int[] donations) {
         int n = donations.length;
         s = new int[n][2];
-        includesFirst = new boolean[n][2];
+        includesFirst = new boolean[2];
 
         s[0][0] = 0;
         s[0][1] = donations[0];
-        includesFirst[0][0] = false;
-        includesFirst[0][1] = true;
+        includesFirst[0] = false;
+        includesFirst[1] = true;
 
         int d = 0;
         boolean includes = false;
         for(int i = 1; i < n; i++) {
             if (s[i - 1][0] > s[i - 1][1]) {
                 d = s[i - 1][0];
-                includes = includesFirst[i - 1][0];
+                includes = includesFirst[0];
             } else {
                 d = s[i - 1][1];
-                includes = includesFirst[i - 1][1];
+                includes = includesFirst[1];
             }
 
-            s[i][0] = d;
-            includesFirst[i][0] = includes;
-
             s[i][1] = s[i - 1][0] + donations[i];
-            includesFirst[i][1] = includesFirst[i - 1][0];
+            includesFirst[1] = includesFirst[0];
+
+            s[i][0] = d;
+            includesFirst[0] = includes;
         }
 
-        if (includesFirst[n - 1][1])
+        if (includesFirst[1])
             s[n - 1][1] -= s[0][1];
 
         return max(s[n - 1][0], s[n - 1][1]);
