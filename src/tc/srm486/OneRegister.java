@@ -1,4 +1,4 @@
-package tc.misc;
+package tc.srm486;
 
 // Topcoder SRM - 486 Div 2, Level 2
 
