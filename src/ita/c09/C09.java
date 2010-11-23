@@ -1,9 +1,9 @@
-package ita.ch09;
+package ita.c09;
 
 import java.util.Arrays;
 import java.util.Random;
 
-public class Median {
+class Median {
 	int median(
 	  int[] u, int p, int q, int[] v, int r, int s) {
 		int m = median(v, p, q);
@@ -19,11 +19,11 @@ public class Median {
 		
 	}
 
-	private int median(int[] u, int p, int q) {
+	int median(int[] u, int p, int q) {
 		return u[(p+q)/2];
 	}
 	
-	private static int[] genarray(int n) {
+	static int[] genarray(int n) {
 		int[] v = new int[n];
 		Random r = new Random(n);
 		for(int i=0; i < n; i++) {
@@ -31,10 +31,12 @@ public class Median {
 		}
 		return v;
 	}
-	
+}
+
+public class C09 {
 	public static void main(String[] _) {
-		int[] u = genarray(10000000);
-		int[] v = genarray(10000000);
+		int[] u = Median.genarray(10000000);
+		int[] v = Median.genarray(10000000);
 		
 		Arrays.sort(u); Arrays.sort(v);
 		
@@ -43,3 +45,5 @@ public class Median {
 				  u, 0, 9999999, v, 0, 9999999));
 	}
 }
+
+
