@@ -1,4 +1,4 @@
-package tc.misc;
+package tc.misc.dp;
 
 //2004 TCCC Online Round 4 - Division I, Level One
 

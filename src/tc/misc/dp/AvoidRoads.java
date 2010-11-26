@@ -1,4 +1,4 @@
-package tc.misc;
+package tc.misc.dp;
 
 //2003 TCO Semifinal Round 4 - Division I, Level One
 
@@ -31,6 +31,12 @@ public class AvoidRoads {
             int m = bad[i].length()/2;
             badPaths.put(bad[i].substring(0, m), bad[i].substring(m));
             badPaths.put(bad[i].substring(m), bad[i].substring(0, m));
+            try {
+				wait();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
         }
 
         return solve(height, width, height + width);

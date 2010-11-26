@@ -1,4 +1,4 @@
-package tc.misc;
+package tc.misc.dp;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,7 +22,8 @@ class Distance {
             return false;
 
         Distance d = (Distance) o;
-        return x == d.x &&
+        return 
+        	x == d.x &&
             y == d.y &&
             count == d.count;
     }
@@ -65,7 +66,7 @@ public class ChessMetric {
         if (s.get(d) != null)
             return s.get(d);
 
-        if(numMoves == 0)
+        if (numMoves == 0)
             return 0;
 
         long r =
