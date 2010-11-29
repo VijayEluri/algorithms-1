@@ -10,7 +10,7 @@ public class PostageStamps {
   int smallestPostage(int m, Integer[] denominations) {
     d = new HashSet<Integer>(Arrays.asList(denominations));
 
-    for (int postage = 1; true; postage++) 
+    for (int postage = 1; true; postage++) //hopefully the algo, may not run forever 
       if (!canBePlaced(m, postage))
         return postage;
   }
