@@ -56,6 +56,7 @@ public class OneRegister {
         if (hasAnswer) {
             res = answer.equals(p2);
         }
+        
         if (!res) {
             System.out.println("DOESN'T MATCH!!!!");
         } else if ((endTime - startTime) / 1000.0 >= 2) {
