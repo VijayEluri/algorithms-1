@@ -7,7 +7,7 @@ public class PostageStamps2 {
     Map<Integer, Integer> cache = new HashMap<Integer, Integer>();
     int[] stamps;
 
-    // much efficient algorithm
+    // more efficient algorithm
     int smallestPostage(int m, int[] denominations) {
         for (int d : denominations)
             cache.put(d, 1);
