@@ -3,6 +3,9 @@ package tc.misc.dp;
 import java.util.HashMap;
 import java.util.Map;
 
+//Single Round Match 159 Round 1 - Division I, Level Two
+//Single Round Match 159 Round 1 - Division II, Level Three
+
 public class WordParts {
   Map<String, Integer> cache = new HashMap<String, Integer>();
 

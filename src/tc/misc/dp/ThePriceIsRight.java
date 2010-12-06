@@ -2,6 +2,8 @@ package tc.misc.dp;
 
 import java.util.Arrays;
 
+//Single Round Match 156 Round 1 - Division II, Level Three
+
 public class ThePriceIsRight {
   int[] s; // s[i] longest ordered seq, having prices[i] as the last item
   int[] c; // total no. of ways of achieving s[i] 

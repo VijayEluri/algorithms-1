@@ -40,6 +40,7 @@ public class BadNeighbors2 {
 
       s[i][1] = s[i - 1][0] + donations[i];
       s[i][0] = d;
+      
     }
 
     return max(s[n - 1][0], s[n - 1][1]);
