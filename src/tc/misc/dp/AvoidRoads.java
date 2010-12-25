@@ -1,6 +1,6 @@
 package tc.misc.dp;
 
-//2003 TCO Semifinal Round 4 - Division I, Level One
+// 2003 TCO Semifinal Round 4 - Division I, Level One
 
 import java.util.Arrays;
 import java.util.HashMap;
