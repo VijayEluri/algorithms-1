@@ -3,13 +3,12 @@ package tc.misc.dp;
 import java.util.HashMap;
 import java.util.Map;
 
-//Single Round Match 159 Round 1 - Division I, Level Two
-//Single Round Match 159 Round 1 - Division II, Level Three
+// Single Round Match 156 Round 1 - Division II, Level Three
 
 public class WordParts {
   Map<String, Integer> cache = new HashMap<String, Integer>();
 
-  int partcount(String original, String compound) {
+  public int partCount(String original, String compound) {
     if (compound.equals(""))
       return 0;
 
@@ -25,7 +24,7 @@ public class WordParts {
     for (int i = compound.length() - 1; i > 0; i--) {
       if (original.startsWith(compound.substring(0, i)) ||
           original.endsWith(compound.substring(0, i))) {
-        int t = partcount(original, compound.substring(i));
+        int t = partCount(original, compound.substring(i));
         if (t != -1) {
           if (parts == -1)
             parts = t + 1;
@@ -39,15 +38,5 @@ public class WordParts {
     cache.put(compound, parts);
     return parts;
   }
-
-  public static void main(String[] _) {
-    System.out.println(new WordParts().partcount("ANTIDISESTABLISHMENTARIANISM", "ANTIDISIANISMISM"));
-    System.out.println(new WordParts().partcount("ANTIDISESTABLISHMENTARIANISM", "ESTABLISHMENT"));
-    System.out.println(new WordParts().partcount("TOPCODERDOTCOM", "TOMTMODERDOTCOM"));
-    System.out.println(new WordParts().partcount("HELLO", "HELLOHEHELLOLOHELLO"));
-    System.out.println(new WordParts().partcount("DONTFORGETTHEEMPTYCASE", ""));
-    System.out.println(new WordParts().partcount("BAAABA", "BAAABAAA"));
-    System.out.println(new WordParts().partcount("ABBBAABABBBAABBABBABABBABAABBAABBBBBABBABABBABAABB", "BBBAABABBBAABBABBABABBABAABBAABBBBBABBABABBABAABAA"));
-  }
 }
-
+//Powered by KawigiEdit 2.1.4 (beta) modified by pivanof!
