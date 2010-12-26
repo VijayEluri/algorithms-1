@@ -1,7 +1,0 @@
-public class <%:class-name%> {
-    public <%:return-type%> <%:method-name%>(<%:param-list%>) {
-        <%:set-caret%>
-    }
-
-<%:testing-code%>
-}
