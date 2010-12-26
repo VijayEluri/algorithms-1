@@ -2,6 +2,8 @@ package tc.misc.dp;
 
 import java.util.Arrays;
 
+// 2003 TCCC Semifinals 3
+
 public class ZigZag {
     int [] s;
     int [] z;

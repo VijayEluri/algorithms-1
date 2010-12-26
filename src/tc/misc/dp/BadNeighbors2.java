@@ -2,7 +2,7 @@ package tc.misc.dp;
 
 import java.util.Arrays;
 
-//2004 TCCC Online Round 4 - Division I, Level One
+// 2004 TCCC Online Round 4 - Division I, Level One
 // cleaner, and much elegant version of BadNeighbors
 
 public class BadNeighbors2 {

@@ -1,6 +1,6 @@
 package tc.misc.dp;
 
-//  Single Round Match 178 Round 1 - Division II, Level Three
+// Single Round Match 178 Round 1 - Division II, Level Three
 
 public class BadSubstring {
   long[][] s;
