@@ -1,7 +1,5 @@
 package tc.misc.dp;
 
-import BitStrings;
-
 public class BitStringsTest {
 
   // BEGIN KAWIGIEDIT TESTING
