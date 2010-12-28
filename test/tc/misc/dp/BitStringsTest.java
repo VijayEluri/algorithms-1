@@ -97,4 +97,3 @@ public class BitStringsTest {
   }
   // END KAWIGIEDIT TESTING
 }
-}
