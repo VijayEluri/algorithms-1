@@ -15,7 +15,7 @@ import java.io.PrintWriter;
 public class beads {
 	private static void countBeads(
 			BufferedReader r, PrintWriter w) throws Exception {
-		r.readLine(); //not required
+		r.readLine(); // ignore
 		char[] beads = r.readLine().toCharArray();
 		
 		int max = 0, prevCount = 0, whites = 0;

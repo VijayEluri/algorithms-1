@@ -27,7 +27,6 @@ public class IntegerSequence {
         if (numbers[i] > numbers[j] && s[j] + 1 > s[i])
           s[i] = s[j] + 1;
     }
-
     return s;
   }
 }
