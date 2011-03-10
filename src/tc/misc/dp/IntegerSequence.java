@@ -1,13 +1,13 @@
 package tc.misc.dp;
 
-import utility.Lib;
+import utilities.StandardProcedures;
 
 // srm 278, div 2, level 3
 
 public class IntegerSequence {
   public int maxSubsequence(int[] numbers) {
     int[] s = longestAscSeq(numbers);
-    int[] t = longestAscSeq(Lib.reverse(numbers));
+    int[] t = longestAscSeq(StandardProcedures.reverse(numbers));
 
     int sz = numbers.length, max = 0;
     for(int i = 0; i < sz; i++)
