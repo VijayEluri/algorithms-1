@@ -1,6 +1,6 @@
 package tc.misc.dp;
 
-import utilities.StandardProcedures;
+import tc.util.StandardProcedures;
 
 // srm 278, div 2, level 3
 

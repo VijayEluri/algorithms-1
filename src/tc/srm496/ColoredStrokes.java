@@ -1,6 +1,6 @@
 package tc.srm496;
 
-import utilities.StandardProcedures;
+import tc.util.StandardProcedures;
 
 public class ColoredStrokes {
     int H, W;
