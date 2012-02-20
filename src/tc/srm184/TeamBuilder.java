@@ -20,7 +20,7 @@ public class TeamBuilder {
 
     return new int[] { noOfincoming(), noOfoutgoing() };
   }
-  
+
   private void BFS(int startNode) {
     final Queue<Integer> queue = new LinkedList<Integer>();
     queue.add(startNode);
@@ -43,7 +43,7 @@ public class TeamBuilder {
       if (paths[node].charAt(i) == '1')
         neighbours.add(i);
     return neighbours;
-  }   
+  }
 
   private int noOfincoming() {
     int count = 0;
