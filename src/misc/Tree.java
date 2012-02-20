@@ -71,20 +71,6 @@ public class Tree {
         return left;
     }
 
-    static long countTrees(int keys) {
-        if (keys == 0 || keys == 1)
-            return keys;
-
-        int n = keys - 1, count = 0;
-        for (int i = 0; i <= n; i++)
-            if (i == n - i)
-                count += countTrees (i);
-            else
-                count += countTrees (i) + countTrees(n - i);
-
-        return count;
-    }
-
     static boolean isBST(Tree root) {
         if (root == null)
             return true;
@@ -162,9 +148,25 @@ public class Tree {
         printPathsHelper(node.left, path, i+1);
         printPathsHelper(node.left, path, i+1);
     }
-
+    
+    public static long countTrees(int n) {
+      if (n < 0)
+        throw new IllegalArgumentException(n + " shouldn't be negative");
+      if (n == 0 || n == 1 || n == 2)
+        return n;
+      
+      long cnt_n_1 = countTrees(n - 1);
+      long cnt_n_1_by_2 = countTrees((n - 1) / 2);
+      long cnt_n_1_by_2_add_1 = countTrees((n - 1) / 2 + 1);
+      
+      if (n % 2 == 0)  // n - 1 == odd
+        return 2 * cnt_n_1 + 2 * cnt_n_1_by_2 * cnt_n_1_by_2_add_1;
+      else
+        return 2 * cnt_n_1 + cnt_n_1_by_2 * cnt_n_1_by_2;
+    }
       
     public static void main(String[] _) {
-        System.out.println(Tree.hasSum(Tree.fromList((Arrays.asList(1, 10, 3, 4, 5, 6, 7, 8))), 16));
+      //System.out.println(Tree.hasSum(Tree.fromList((Arrays.asList(1, 10, 3, 4, 5, 6, 7, 8))), 16));
+      System.out.println(countTrees(50));
     }
 }

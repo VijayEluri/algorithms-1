@@ -1,4 +1,4 @@
-package misc;
+ package misc;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +22,7 @@ public class FindPairs {
       second = _second;
     }
 
+    @Override
     public String toString() {
       return "(" + first + " " + second + ")";
     }

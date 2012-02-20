@@ -34,8 +34,6 @@ public class SubsetSum {
   }
 
   public static void main(String[] args) {
-    if (null instanceof Object)
-      System.out.println("hello");
     System.out.println(new SubsetSum().contains(new int[] {6,8,41,36,58,69}, 1));
   }
 }
