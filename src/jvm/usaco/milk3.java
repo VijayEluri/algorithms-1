@@ -1,73 +1,57 @@
-//package usaco;
+package usaco;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.Arrays;
-import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.SortedSet;
-import java.util.TreeSet;
 
 /*
-ID: rdsr.me1 
-PROG: clocks 
-LANG: JAVA
-*/
+ * ID: rdsr.me1 PROG: milk3 LANG: JAVA
+ */
 public class milk3 {
     int[] capacity;
+    boolean[][][] visited;
 
-    Collection<Integer> amountInC(int A, int B, int C) {
-        capacity = new int[] {A, B, C};
-        //int[][][] cache = new int[A+1][B+1][C+1];
-        
-        final List<Integer> c = new LinkedList<Integer>();
-        final int max = Math.max(A, Math.max(B, C));
-        final int d = max;
-        for (int i = 0; i <= d; i++) {
-            c.addAll(search(new int[] {0, 0, C}, d));
-        }
-        
-        final SortedSet<Integer> s = new TreeSet<Integer>(c);
-        return s;
+    List<Integer> amountInC(int a, int b, int c) {
+        capacity = new int[] {a, b, c};
+        visited = new boolean[a + 1][b + 1][c + 1];
+        final int[] s = new int[] {0, 0, c};
+        setVisited(s);
+        final List<Integer> r = search(s);
+        Collections.sort(r);
+        return r;
     }
 
-    List<Integer> search(int[] s, int depth) {
+    private void setVisited(int[] s) {
+        visited[s[0]][s[1]][s[2]] = true;
+    }
+
+    private boolean visited(int[] s) {
+        return visited[s[0]][s[1]][s[2]];
+    }
+
+    private List<Integer> search(int[] s) {
         final List<Integer> r = new LinkedList<Integer>();
-        if (s[0] == 0 && s[2] != 0) {
+        if (s[0] == 0) {
             r.add(s[2]);
         }
-        if (depth == 0) {
-            return r;
-        } else {
-            int[] t = pour(0, 1, s);
-            if (!Arrays.equals(s, t)) {
-                r.addAll(search(t, depth - 1));
+        final List<Integer> ci = list(0, 1, 0, 2, 1, 0, 1, 2, 2, 0, 2, 1);
+        for (int i = 0; i < ci.size() - 1; i += 2) {
+            final int[] t = pour(ci.get(i), ci.get(i + 1), s);
+            if (!visited(t)) {
+                setVisited(t);
+                r.addAll(search(t));
             }
-            t = pour(0, 2, s);
-            if (!Arrays.equals(s, t)) {
-                r.addAll(search(t, depth - 1));
-            }
-            t = pour(1, 0, s);
-            if (!Arrays.equals(s, t)) {
-                r.addAll(search(t, depth - 1));
-            }
-            t = pour(1, 2, s);
-            if (!Arrays.equals(s, t)) {
-                r.addAll(search(t, depth - 1));
-            }
-            t = pour(2, 0, s);
-            if (!Arrays.equals(s, t)) {
-                r.addAll(search(t, depth - 1));
-            }
-            t = pour(2, 1, s);
-            if (!Arrays.equals(s, t)) {
-                r.addAll(search(t, depth - 1));
-            }
-            return r;
         }
+        return r;
+    }
+
+    private static List<Integer> list(Integer... is) {
+        return Arrays.asList(is);
     }
 
     private int[] pour(int i, int j, int[] s) {
@@ -94,16 +78,19 @@ public class milk3 {
     }
 
     public static void main(String[] _) throws FileNotFoundException {
-        final Scanner s = new Scanner(new File("milk3.in"));
+        final Scanner s = new Scanner(new File("resources/milk3.in"));
         final int a = s.nextInt();
         final int b = s.nextInt();
         final int c = s.nextInt();
         s.close();
 
-        final PrintWriter pr = new PrintWriter("milk3.out");
-        for (final int o : new milk3().amountInC(a, b, c)) {
-            pr.print(o);
-            pr.print(" ");
+        final PrintWriter pr = new PrintWriter("resources/milk3.out");
+        final List<Integer> r = new milk3().amountInC(a, b, c);
+        for (int i = 0; i < r.size(); i++) {
+            pr.print(r.get(i));
+            if (i < r.size() - 1) {
+                pr.print(" ");
+            }
         }
         pr.println();
         pr.close();
