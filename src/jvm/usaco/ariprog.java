@@ -10,9 +10,7 @@ import java.util.List;
 import java.util.Scanner;
 
 /*
-ID: rdsr.me1 
-PROG: ariprog 
-LANG: JAVA
+ * ID: rdsr.me1 PROG: ariprog LANG: JAVA
  */
 public class ariprog {
     public static void main(String[] args) throws IOException {
@@ -34,12 +32,10 @@ public class ariprog {
         boolean foundSeq = false;
         final List<int[]> seqs = new ArrayList<int[]>(10000);
         for (int a = 0; a < S.length; a++) {
-            if (S[a]) {
-                for (int d = 1; a + (n - 1) * d <= l; d++) {
-                    if (allTermsInS(a, d, n, S)) {
-                        foundSeq = true;
-                        seqs.add(new int[] {a, d});
-                    }
+            for (int d = 1; a + (n - 1) * d <= l; d++) {
+                if (allTermsInS(a, d, n, S)) {
+                    foundSeq = true;
+                    seqs.add(new int[] {a, d});
                 }
             }
         }
@@ -59,16 +55,16 @@ public class ariprog {
 
             });
         }
-        
-        for (int[] x : seqs) {
+
+        for (final int[] x : seqs) {
             pr.println(x[0] + " " + x[1]);
         }
-        
+
         pr.close();
     }
 
     private static boolean allTermsInS(int a, int d, int n, boolean[] s) {
-        for (int j = 2; j <= n; j++) {
+        for (int j = 1; j <= n; j++) {
             if (!s[a + (j - 1) * d]) {
                 return false;
             }
