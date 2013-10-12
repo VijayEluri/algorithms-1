@@ -8,9 +8,7 @@ import java.util.List;
 import java.util.Scanner;
 
 /*
-ID: rdsr.me1 
-LANG: JAVA 
-PROG: pprime
+ * ID: rdsr.me1 LANG: JAVA PROG: pprime
  */
 public class pprime {
     public static void main(String[] args) throws IOException {
@@ -20,7 +18,7 @@ public class pprime {
         s.close();
 
         final PrintWriter pr = new PrintWriter("resources/pprime.out");
-        final List<Integer> primes = buildPrimes((int)Math.sqrt(b) + 1);
+        final List<Integer> primes = buildPrimes((int) Math.sqrt(b) + 1);
 
         for (int i = 1; i < 10; i += 2) {
             final int n = i;
@@ -120,7 +118,7 @@ public class pprime {
 
     private static boolean isPrime(int n, List<Integer> primes) {
         for (final int p : primes) {
-            if (Math.sqrt(p) > n) {
+            if (p * p > n) {
                 break;
             }
             if (p == n) {
