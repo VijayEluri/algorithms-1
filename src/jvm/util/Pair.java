@@ -1,4 +1,4 @@
-package tc.util;
+package util;
 
 public class Pair {
   public int x, y;
