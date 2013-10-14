@@ -97,7 +97,6 @@ public class clocks {
     public static void main(String[] args) throws FileNotFoundException {
         final Scanner s = new Scanner(new File("resources/clocks.in"));
         final int[] state = new int[9];
-
         for (int i = 0; s.hasNext(); i++) {
             state[i] = s.nextInt();
         }
@@ -105,8 +104,6 @@ public class clocks {
 
         final PrintWriter pr = new PrintWriter("resources/clocks.out");
         pr.println(shortestMoves(state));
-
-
         pr.close();
     }
 
