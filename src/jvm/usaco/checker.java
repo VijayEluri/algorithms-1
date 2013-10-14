@@ -10,8 +10,10 @@ import java.io.PrintWriter;
 import java.util.StringTokenizer;
 
 /**
- * ID: rdsr.me1 PROG: checker LANG: JAVA
- */
+ID: rdsr.me1
+PROG: checker 
+LANG: JAVA
+*/
 public class checker {
     int[][] first3;
     int filled;
@@ -21,31 +23,31 @@ public class checker {
     int[][] SE_NW;
     int[][] SW_NE;
 
-    boolean[] rowOcc;  // row occupied
+    boolean[] colOcc; // row occupied
     boolean[] SE_NW_OCC; // se-nw diagonal occupied
     boolean[] SW_NE_OCC; // sw-ne diagonal occupied
-    
+
     boolean[][] soln;
-    
+
     int allSolutions(int n) {
         this.first3 = new int[3][6];
         this.filled = 0;
         this.n = n;
 
         SE_NW = fill();
-        print(SE_NW);
-        
-        System.out.println("-===-");
-        
-        SW_NE = rotate90ClockWise(SE_NW);
-        print(SW_NE);
+        //print(SE_NW);
 
-        rowOcc = new boolean[n];
+        //System.out.println("-===-");
+
+        SW_NE = rotate90ClockWise(SE_NW);
+        //print(SW_NE);
+
+        colOcc = new boolean[n];
         SE_NW_OCC = new boolean[2 * n - 1];
         SW_NE_OCC = new boolean[2 * n - 1];
         soln = new boolean[n][n];
 
-        solve(n - 1);
+        solve(0);
         return nSolns;
     }
 
@@ -87,50 +89,49 @@ public class checker {
         return m;
     }
 
-    private void solve(int col) {
-        if (col < 0) {
+    private void solve(int row) {
+        if (row == n) {
             if (filled < 3) {
                 first3[filled] = soln();
                 filled += 1;
             }
             nSolns += 1;
-        }
-
-        for (int row = 0; row < n; row++) {
-            if (canBePlaced(row, col)) {
-                place(row, col);
-                solve(col - 1);
-                unplace(row, col);
+        } else {
+            for (int col = 0; col < n; col++) {
+                if (canBePlaced(row, col)) {
+                    place(row, col);
+                    solve(row + 1);
+                    unplace(row, col);
+                }
             }
         }
-        return;
     }
 
     private boolean canBePlaced(int row, int col) {
-        return !rowOcc[row] &&
+        return !colOcc[col] &&
                 !SE_NW_OCC[SE_NW[row][col]] &&
                 !SW_NE_OCC[SW_NE[row][col]];
     }
 
     private void place(int row, int col) {
         soln[row][col] = true;
-        rowOcc[row] = true;
+        colOcc[col] = true;
         SE_NW_OCC[SE_NW[row][col]] = true;
         SW_NE_OCC[SW_NE[row][col]] = true;
     }
 
     private void unplace(int row, int col) {
         soln[row][col] = false;
-        rowOcc[row] = false;
+        colOcc[col] = false;
         SE_NW_OCC[SE_NW[row][col]] = false;
         SW_NE_OCC[SW_NE[row][col]] = false;
     }
 
     private int[] soln() {
         int k = 0;
-        int[] cols = new int[n];
-        for(int i = 0; i < n; i++) {
-            for(int j = 0; j < n; j++) {
+        final int[] cols = new int[n];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
                 if (soln[i][j]) {
                     cols[k] = j + 1;
                     k += 1;
@@ -140,8 +141,10 @@ public class checker {
         }
         return cols;
     }
-    
+
     public static void main(String[] args) throws IOException {
+        final long startTime = System.currentTimeMillis();        
+     
         final FastScanner s = new FastScanner("checker.in");
         final int N = s.nextInt();
         s.close();
@@ -151,17 +154,21 @@ public class checker {
         final int solns = c.allSolutions(N);
         for (final int[] pos : c.first3) {
             for (int i = 0; i < N; i++) {
-               pw.print(pos[i]);
-               if (i < N - 1) {
-                   pw.print(" ");
-               }
+                pw.print(pos[i]);
+                if (i < N - 1) {
+                    pw.print(" ");
+                }
             }
             pw.println();
         }
         pw.println(solns);
         pw.close();
+        
+        final long endTime = System.currentTimeMillis();
+        System.out.println("Time: " + (endTime - startTime) / 1000.0 + " seconds");
     }
 }
+
 
 class FastScanner implements Closeable {
     private final BufferedReader reader;
