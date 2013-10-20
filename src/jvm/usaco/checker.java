@@ -69,7 +69,7 @@ public class checker {
     }
 
     public static void main(String[] args) throws IOException {
-        final FastScanner s = new FastScanner("checker.in");
+        final FastScanner s = new FastScanner("resources/checker.in");
         final int N = s.nextInt();
         s.close();
 
