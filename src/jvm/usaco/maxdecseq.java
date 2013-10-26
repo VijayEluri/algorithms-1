@@ -19,7 +19,7 @@ public class maxdecseq {
         int highestRun = 1;
 
         for (int i = n - 2; i >= 0; i--) {
-            if   (seq[i] < bestRun[0]) {
+            if (seq[i] < bestRun[0]) {
                 bestRun[0] = seq[i];
                 continue;
             }
@@ -28,7 +28,7 @@ public class maxdecseq {
                     if (j == highestRun - 1 || seq[i] < bestRun[j + 1]) {
                         bestRun[j + 1] = seq[i];
                         if (j + 1 == highestRun) {
-                            highestRun += 1;    
+                            highestRun += 1;
                         }
                     }
                 }
