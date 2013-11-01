@@ -35,7 +35,7 @@ public class preface {
 
         for (int i = 1; i <= n; i++) {
             final String roman = solve(i);
-            System.out.println(roman);
+            // System.out.println(roman);
             for (final char c : roman.toCharArray()) {
                 if (count.containsKey(c)) {
                     count.put(c, count.get(c) + 1);
