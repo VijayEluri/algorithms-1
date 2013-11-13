@@ -68,7 +68,7 @@ public class prefix {
     }
 
     public static void main(String[] args) throws IOException {
-        final FastScanner s = new FastScanner("prefix.in");
+        final FastScanner s = new FastScanner("resources/prefix.in");
         String str = null;
         final Set<String> primitives = new HashSet<String>();
         while (!(str = s.next()).equals(".")) {
