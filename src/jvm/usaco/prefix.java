@@ -1,52 +1,70 @@
 package usaco;
 
-import java.io.BufferedReader;
-import java.io.Closeable;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.StringTokenizer;
+
+import util.FastScanner;
 
 /*
-ID: rdsr.me1 
-PROG: prefix 
-LANG: JAVA
-*/
+ * ID: rdsr.me1 PROG: prefix LANG: JAVA
+ */
 public class prefix {
-    Set<String> primitves;
+    Set<String> primitives;
     int[] cache;
 
     public prefix(Set<String> primitives) {
-        this.primitves = primitives;
+        this.primitives = primitives;
     }
 
     private int longestPrefix(String seq) {
-        cache = new int[seq.length() + 1];
-        for (int i = 0; i < cache.length; i++) {
-            cache[i] = -1;
-        }
-        return longestPrefix(seq.toCharArray(), seq.length());
-    }
+        final int n = seq.length();
+        final boolean[] s = new boolean[n];
 
-    private int longestPrefix(char[] seq, int len) {
-        if (len <= 0) {
-            return 0;
-        }
-        if (cache[len] != -1) {
-            return cache[len];
-        }
-        for (int j = 1; j <= Math.min(10, len); j++) {
-            final String p = new String(seq, len - j, j);
-            if (primitves.contains(p)) {
-                final int lp = longestPrefix(seq, len - p.length());
-                if (lp == len - p.length()) {
-                    return cache[len] = len;
+        int i = 0;
+        int lpl = 0;
+        for (final String p : primitives) {
+            if (p.length() > lpl) {
+                lpl = p.length();
+            }
+
+            if (seq.startsWith(p)) {
+                s[p.length() - 1] = true;
+                if (p.length() - 1 > i) {
+                    i = p.length() - 1;
                 }
             }
         }
-        return cache[len] = longestPrefix(seq, len - 1);
+
+        while (i < n) {
+            boolean found = false;
+            int incr = 0;
+            for (final String p : primitives) {
+                for (int j = Math.max(i - lpl, 0); j <= i && j + p.length() <= n; j++) {
+                    if (p.equals(seq.substring(j, j + p.length()))) {
+                        if (j == 0 || (j > 0 && s[j - 1])) {
+                            found = true;
+                            s[j + p.length() - 1] = true;
+                            if (p.length() > incr) {
+                                incr = p.length();
+                            }
+                        }
+                    }
+                }
+            }
+            if (!found) {
+                break;
+            }
+            i += incr;
+        }
+
+        for (int j = n - 1; j >= 0; j--) {
+            if (s[j]) {
+                return j + 1;
+            }
+        }
+        return 0;
     }
 
     public static void main(String[] args) throws IOException {
@@ -66,42 +84,5 @@ public class prefix {
         final PrintWriter w = new PrintWriter("prefix.out");
         w.println(new prefix(primitives).longestPrefix(seq.toString()));
         w.close();
-
-    }
-}
-
-
-class FastScanner implements Closeable {
-    private final BufferedReader reader;
-    private StringTokenizer tokenizer;
-
-    public FastScanner(String filename) throws IOException {
-        reader = new BufferedReader(new FileReader(filename));
-        tokenizer = new StringTokenizer("");
-    }
-
-    public String next() throws IOException {
-        while (!tokenizer.hasMoreTokens()) {
-            final String line = reader.readLine();
-            if (line == null) {
-                return null;
-            } else {
-                tokenizer = new StringTokenizer(line);
-            }
-        }
-        return tokenizer.nextToken();
-    }
-
-    public int nextInt() throws IOException {
-        return Integer.parseInt(next());
-    }
-
-    public double nextDouble() throws IOException {
-        return Double.parseDouble(next());
-    }
-
-    @Override
-    public void close() throws IOException {
-        reader.close();
     }
 }
