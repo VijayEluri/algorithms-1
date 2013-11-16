@@ -9,40 +9,41 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.StringTokenizer;
 
+/**
+ID: rdsr.me1 
+PROG: money 
+LANG: JAVA
+ */
 public class money {
-    int[] v;
+    // int[] v;
+    // long[][] cache;
 
     long nWays(int[] v, int n) {
-        this.v = v;
-        return solve(0, n, new LinkedList<Integer>());
+        // this.v = v;
+        // this.cache =
+        return solve(0, n, v, new long[v.length][n + 1]);
     }
 
-    private long solve(int i, int n, List l) {
+    private long solve(int i, int n, int[] v, long[][] cache) {
         if (i == v.length) {
             if (n == 0) {
-                System.out.println(l);
                 return 1;
             } else {
                 return 0;
             }
-        } else {
-            long nWays = 0l;
-            for (int j = 0; n - v[i] * j >= 0; j++) {
-                for (int k = j; k > 0; k--) {
-                    l.add(v[i]);
-                }
-                nWays += solve(i + 1, n - v[i] * j, l);
-
-                for (int k = j; k > 0; k--) {
-                    l.remove(l.size() - 1);
-                }
-            }
-            return nWays;
         }
+
+        if (cache[i][n] != 0l) {
+            return cache[i][n];
+        }
+
+        long nWays = 0l;
+        for (int j = 0; n - v[i] * j >= 0; j++) {
+            nWays += solve(i + 1, n - v[i] * j, v, cache);
+        }
+        return cache[i][n] = nWays;
     }
 
 
@@ -57,9 +58,14 @@ public class money {
         s.close();
 
         final PrintWriter w = new PrintWriter(new BufferedWriter(new FileWriter(new File("money.out"))));
-        Arrays.sort(v);
+
+        final long startTime = System.currentTimeMillis();
+
         w.println(new money().nWays(v, n));
         w.close();
+        final long endTime = System.currentTimeMillis();
+
+        System.out.println(endTime - startTime);
     }
 }
 
