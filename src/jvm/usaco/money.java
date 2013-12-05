@@ -8,25 +8,37 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Arrays;
 import java.util.StringTokenizer;
 
+import util.FastScanner;
+
 /**
-ID: rdsr.me1 
-PROG: money 
-LANG: JAVA
+ * ID: rdsr.me1 PROG: money LANG: JAVA
  */
 public class money {
-    // int[] v;
-    // long[][] cache;
-
-    long nWays(int[] v, int n) {
-        // this.v = v;
-        // this.cache =
-        return solve(0, n, v, new long[v.length][n + 1]);
+    static long nWays(int[] v, int n) {
+        //return solve(0, n, v, new long[v.length][n + 1]);
+        return solve(v, n);
     }
 
-    private long solve(int i, int n, int[] v, long[][] cache) {
+    static long solve(int[] v, int n) {
+        final long[][] dp = new long[v.length][n + 1];
+        
+        dp[0][v[0]] = 1;
+        
+        for (int i = 1; i < v.length; i++) {    
+            for (int j = v[0]; j <= n; j++) {
+                for (int k = 0; j - v[i] * k >= 0; k++) {
+                    dp[i][j] += dp[i - 1][j - v[i] * k];
+                }
+            }
+        }
+        
+        return dp[v.length - 1][n];
+    }
+
+
+    static long solve(int i, int n, int[] v, long[][] cache) { 
         if (i == v.length) {
             if (n == 0) {
                 return 1;
@@ -66,36 +78,5 @@ public class money {
         final long endTime = System.currentTimeMillis();
 
         System.out.println(endTime - startTime);
-    }
-}
-
-
-class FastScanner implements Closeable {
-    final BufferedReader reader;
-    StringTokenizer tokenizer;
-
-    public FastScanner(String filename) throws IOException {
-        reader = new BufferedReader(new FileReader(filename));
-        tokenizer = new StringTokenizer("");
-    }
-
-    public String next() throws IOException {
-        while (!tokenizer.hasMoreTokens()) {
-            tokenizer = new StringTokenizer(reader.readLine());
-        }
-        return tokenizer.nextToken();
-    }
-
-    public int nextInt() throws IOException {
-        return Integer.parseInt(next());
-    }
-
-    public double nextDouble() throws IOException {
-        return Double.parseDouble(next());
-    }
-
-    @Override
-    public void close() throws IOException {
-        reader.close();
     }
 }
