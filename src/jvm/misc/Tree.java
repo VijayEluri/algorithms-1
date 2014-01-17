@@ -164,7 +164,22 @@ public class Tree {
       else
         return 2 * cnt_n_1 + cnt_n_1_by_2 * cnt_n_1_by_2;
     }
-      
+
+    static Tree lca(Tree root, Tree a, Tree b) {
+        if (a == null || b == null) {
+            return null;
+        }
+        Tree lca = lca(root.right, a, b);
+        if (lca != null) {
+            return lca;
+        }
+        lca = lca(root.left, a, b);
+        if (lca != null) {
+            return lca;
+        }
+        return root;
+    }
+    
     public static void main(String[] _) {
       //System.out.println(Tree.hasSum(Tree.fromList((Arrays.asList(1, 10, 3, 4, 5, 6, 7, 8))), 16));
       System.out.println(countTrees(50));

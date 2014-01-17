@@ -1,4 +1,4 @@
-package usaco;
+//package usaco;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -120,20 +119,33 @@ public class maze1 {
     }
 
     private int worstStepsFromEitherExit() {
-        return Math.min(
-                longestPath(new State(i1, j1)),
-                longestPath(new State(i2, j2)));
+        final Map<State, Integer> distance1 = minSteps(new State(i1, j1));
+        final Map<State, Integer> distance2 = minSteps(new State(i2, j2));
+
+        int largetMinDistance = -1;
+        for (final State s : distance1.keySet()) {
+            int minDistance = 0;
+            if (distance1.get(s) < distance2.get(s)) {
+                minDistance = distance1.get(s);
+            } else {
+                minDistance = distance2.get(s);
+            }
+            if (minDistance > largetMinDistance) {
+                largetMinDistance = minDistance;
+            }
+        }
+        return largetMinDistance;
     }
 
-    private int longestPath(State state) {
+    private Map<State, Integer> minSteps(State state) {
         final Map<State, Integer> distance = new HashMap<State, Integer>();
         final Queue<State> q = new LinkedList<State>();
         final Set<State> cache = new HashSet<State>();
-        
+
         distance.put(state, 1);
         q.add(state);
         cache.add(state);
-        
+
         while (!q.isEmpty()) {
             final State s = q.poll();
             for (final State n : neighbors(s)) {
@@ -143,23 +155,22 @@ public class maze1 {
                 }
             }
         }
-
-        return Collections.max(distance.values());
+        return distance;
     }
 
     private Collection<State> neighbors(State s) {
         final Collection<State> r = new ArrayList<State>(4);
         for (final Dir d : maze[s.i][s.j].openFences) {
-            if (d == Dir.UP && s.i != 0) {
+            if (d == Dir.UP && s.i - 1 >= 0) {
                 r.add(new State(s.i - 1, s.j));
             }
-            if (d == Dir.LEFT && s.j != w - 1) {
+            if (d == Dir.LEFT && s.j + 1 < w) {
                 r.add(new State(s.i, s.j + 1));
             }
-            if (d == Dir.DOWN && s.i != h - 1) {
+            if (d == Dir.DOWN && s.i + 1 < h) {
                 r.add(new State(s.i + 1, s.j));
             }
-            if (d == Dir.RIGHT && s.j != 0) {
+            if (d == Dir.RIGHT && s.j - 1 >= 0) {
                 r.add(new State(s.i, s.j - 1));
             }
         }
