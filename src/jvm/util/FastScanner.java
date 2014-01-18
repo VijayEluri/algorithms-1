@@ -26,6 +26,7 @@ public class FastScanner implements Closeable {
         return Integer.parseInt(next());
     }
 
+
     public double nextDouble() throws IOException {
         return Double.parseDouble(next());
     }

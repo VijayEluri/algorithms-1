@@ -1,4 +1,4 @@
-//package usaco;
+package usaco;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -14,9 +14,7 @@ import java.util.Queue;
 import java.util.Set;
 
 /*
-ID: rdsr.me1 
-PROG: maze1 
-LANG: JAVA
+ * ID: rdsr.me1 PROG: maze1 LANG: JAVA
  */
 public class maze1 {
     int h, w;
@@ -114,11 +112,11 @@ public class maze1 {
         input = null;
 
         final PrintWriter pw = new PrintWriter("maze1.out");
-        pw.println(m.worstStepsFromEitherExit());
+        pw.println(m.stepsFromEitherExit());
         pw.close();
     }
 
-    private int worstStepsFromEitherExit() {
+    private int stepsFromEitherExit() {
         final Map<State, Integer> distance1 = minSteps(new State(i1, j1));
         final Map<State, Integer> distance2 = minSteps(new State(i2, j2));
 
