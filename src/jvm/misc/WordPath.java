@@ -94,6 +94,6 @@ public class WordPath {
 
     public static void main(String[] args) throws IOException {
         final WordPath wp = new WordPath();
-        System.out.println(wp.path("god", "dog"));
+        System.out.println(wp.path("ass", "sos"));
     }
 }
