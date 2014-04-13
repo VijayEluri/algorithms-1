@@ -33,8 +33,8 @@ public class RegexMatch {
                     break;
                 default:
                     for (int i = 0; i < s.length(); i++) {
-                        if (i == 0 || s.charAt(i) == r1) {
-                            result = matches(s.substring(i), re.substring(1));
+                        if (i == 0 || s.charAt(i-1) == r1) {
+                            result = matches(s.substring(i), re.substring(2));
                             if (result) {
                                 break;
                             }
@@ -60,8 +60,8 @@ public class RegexMatch {
     public static void main(String[] args) {
         System.out.println(RegexMatch.matches("", ".*"));
         System.out.println(RegexMatch.matches("", "."));
-        
-        //true
+
+        // true
         System.out.println(RegexMatch.matches("a", "."));
         System.out.println(RegexMatch.matches("", ".*"));
         System.out.println(RegexMatch.matches("abc", ".*c"));
@@ -69,6 +69,7 @@ public class RegexMatch {
         System.out.println(RegexMatch.matches("abc", ".*abc"));
         System.out.println(RegexMatch.matches("abc", "..."));
 
-        System.out.println(RegexMatch.matches("facebook", "facebo.*k"));
+        System.out.println(RegexMatch.matches("facebook", "facebo*k"));
+        System.out.println(RegexMatch.matches("k", "i*k"));
     }
 }
