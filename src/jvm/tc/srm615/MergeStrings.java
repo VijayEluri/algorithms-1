@@ -7,7 +7,7 @@ import java.util.Map;
 
 
 public class MergeStrings {
-    private static final String NOT_POSSIBLE = "not_possible";
+    private static final String NOT_POSSIBLE = "Z";
     Map<List<String>, String> cache;
 
     public String getmin(String S, String A, String B) {
@@ -26,7 +26,7 @@ public class MergeStrings {
             return cache.get(key);
         }
 
-        String r = null;
+        String r = NOT_POSSIBLE;
         if (s.length() != a.length() + b.length()) {
             r = NOT_POSSIBLE;
         } else {
@@ -44,46 +44,40 @@ public class MergeStrings {
                 final char cb = b.charAt(0);
                 final char cs = s.charAt(0);
 
-                char prefixChar;
                 if (cs == '?') {
-                    if (ca < cb) {
-                        prefixChar = ca;
-                        r = find(s.substring(1), a.substring(1), b);
-                    } else if (ca == cb) {
-                        prefixChar = ca;
-                        r = find(s.substring(1), a.substring(1), b);
-                        final String ar = find(s.substring(1), a, b.substring(1));
-                        if (r == null || r == NOT_POSSIBLE || (ar != NOT_POSSIBLE && ar.compareTo(r) < 0)) {
-                            r = ar;
-                        }
-                    } else {
-                        prefixChar = cb;
-                        r = find(s.substring(1), a, b.substring(1));
-                    }
-
+                    final String r1 = find(s.substring(1), a.substring(1), b);
+                    final String r2 = find(s.substring(1), a, b.substring(1));
+                    r = min(ca, r1, cb, r2);
                 } else {
-                    prefixChar = cs;
                     if (cs == ca) {
                         r = find(s.substring(1), a.substring(1), b);
                     }
+                    String ar = NOT_POSSIBLE;
                     if (cs == cb) {
-                        final String ar = find(s.substring(1), a, b.substring(1));
-                        if (r == null || r == NOT_POSSIBLE || (ar != NOT_POSSIBLE && ar.compareTo(r) < 0)) {
-                            r = ar;
-                        }
+                        ar = find(s.substring(1), a, b.substring(1));
                     }
-                }
-
-                if (r == null) {
-                    r = NOT_POSSIBLE;
-                }
-                if (r != NOT_POSSIBLE) {
-                    r = prefixChar + r;
+                    r = min(cs, r, cs, ar);
                 }
             }
         }
         cache.put(key, r);
         return r;
+    }
+
+    private static String min(char c1, String r1, char c2, String r2) {
+        if (r1 == NOT_POSSIBLE && r2 == NOT_POSSIBLE) {
+            return NOT_POSSIBLE;
+        }
+        if (r1 == NOT_POSSIBLE) {
+            return c2 + r2;
+        }
+        if (r2 == NOT_POSSIBLE) {
+            return c1 + r1;
+        }
+
+        r1 = c1 + r1;
+        r2 = c2 + r2;
+        return r1.compareTo(r2) <= 0 ? r1 : r2;
     }
 
     private static boolean matches(String c, String s) {
@@ -185,6 +179,13 @@ public class MergeStrings {
         p3 = "KDKDKDKKKDDKDDKKKDKDKKDKDDDKDDDKKDKKKDKKDDKDDDKDKK";
         all_right = KawigiEdit_RunTest(4, p0, p1, p2, true, p3) && all_right;
         // ------------------
+
+        // ----- test 4 -----
+        p0 = "????Q???J???B?X";
+        p1 = "PIQJBQ";
+        p2 = "CPVJVXBLX";
+        p3 = "CPIPQJBVJQVXBLX";
+        all_right = KawigiEdit_RunTest(4, p0, p1, p2, true, p3) && all_right;
 
         if (all_right) {
             System.out.println("You're a stud (at least on the example cases)!");
