@@ -40,10 +40,11 @@ public class Match {
         //true
         System.out.println(Match.matches("a", "?"));
         System.out.println(Match.matches("", "*"));
-        System.out.println(Match.matches("abc", "*c"));
+        System.out.println(Match.matches("abc", "?*c"));
         System.out.println(Match.matches("abc", "*bc"));
         System.out.println(Match.matches("abc", "*abc"));
         System.out.println(Match.matches("abc", "???"));
-        System.out.println(Match.matches("abc", "*"));
+        
+        System.out.println(Match.matches("facebook", "facebo?*k"));
     }
 }

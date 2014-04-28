@@ -60,6 +60,8 @@ class Anagram {
 
 public class AnagramsList {
     public static void main(String[] args) {
+        System.out.println(new Anagram("abc").equals(new Anagram("bac")));
+        
         final Map<Anagram, List<String>> anagrams = new HashMap<Anagram, List<String>>();
         for (final String s : new String[] {"cab", "cz", "abc", "bca", "zc"}) {
             final Anagram a = new Anagram(s);
@@ -71,7 +73,5 @@ public class AnagramsList {
         }
         
         System.out.println(anagrams.values());
-        
-        System.out.println(new Anagram("abc").equals(new Anagram("bac")));
     }
 }

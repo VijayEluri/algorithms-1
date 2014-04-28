@@ -33,7 +33,7 @@ public class RegexMatch {
                     break;
                 default:
                     for (int i = 0; i < s.length(); i++) {
-                        if (i == 0 || s.charAt(i-1) == r1) {
+                        if (i == 0 || s.charAt(i - 1) == r1) {
                             result = matches(s.substring(i), re.substring(2));
                             if (result) {
                                 break;
@@ -71,5 +71,6 @@ public class RegexMatch {
 
         System.out.println(RegexMatch.matches("facebook", "facebo*k"));
         System.out.println(RegexMatch.matches("k", "i*k"));
+        System.out.println(RegexMatch.matches("k", "a.*k"));
     }
 }

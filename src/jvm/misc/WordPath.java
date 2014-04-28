@@ -11,6 +11,7 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
+import java.util.UUID;
 
 public class WordPath {
     Queue<String> q;
@@ -94,6 +95,8 @@ public class WordPath {
 
     public static void main(String[] args) throws IOException {
         final WordPath wp = new WordPath();
-        System.out.println(wp.path("ass", "sos"));
+        System.out.println(UUID.nameUUIDFromBytes("mediaops_cpt".getBytes()));
+
+        //System.out.println(wp.path("god", "dog"));
     }
 }

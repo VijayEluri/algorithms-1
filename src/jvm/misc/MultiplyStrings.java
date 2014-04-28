@@ -1,30 +1,44 @@
 package misc;
 
 public class MultiplyStrings {
-    static String multiply(String s1, String s2) {
+    static String multiply(String a, String b) {
+        if (a == null || a.isEmpty()) {
+            throw new IllegalArgumentException("Invalid number: " + a);
+        }
+        if (b == null || b.isEmpty()) {
+            throw new IllegalArgumentException("Invalid number: " + b);
+        }
+
+        final String s = a.length() < b.length() ? a : b;
+        final String t = a.length() < b.length() ? b : a;
+
         long r = 0l;
-        final int n1 = s1.length();
-        for (int i = 0; i < s1.length(); i++) {
-            r += (long) (Math.pow(10, i) * multiply(s1.charAt(n1 - i - 1), s2));
+        long pow10 = 1l;
+        final int n1 = s.length();
+        for (int i = 0; i < s.length(); i++) {
+            r += pow10 * multiply(s.charAt(n1 - i - 1), t);
+            pow10 *= 10;
         }
 
         return Long.toString(r);
     }
 
     private static long multiply(char c, String s) {
-        int n = c -'0';
+        final int n = c - '0';
         int carry = 0;
-        int r = 0;
-        for (int i = s.length() - 1, j = 0; i >= 0; i--, j++) {
+        long r = 0l;
+        long pow10 = 1l;
+        for (int i = s.length() - 1; i >= 0; i--) {
             final int mi = s.charAt(i) - '0';
-            int ri = (mi * n  + carry);
+            int ri = (mi * n + carry);
             if (ri > 9) {
                 carry = ri / 10;
                 ri = ri % 10;
             } else {
                 carry = 0;
             }
-            r += Math.pow(10, j) * ri;
+            r += pow10 * ri;
+            pow10 *= 10;
         }
         return r;
     }

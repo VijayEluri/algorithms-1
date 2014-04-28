@@ -1,24 +1,20 @@
-//package usaco;
+package usaco;
 
-import java.io.BufferedReader;
-import java.io.Closeable;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
-import java.util.StringTokenizer;
 import java.util.Map.Entry;
 import java.util.PriorityQueue;
 
+import util.FastScanner;
+
 /**
-ID: rdsr.me1 
-PROG: comehome 
-LANG: JAVA
-*/
+ * ID: rdsr.me1 PROG: comehome LANG: JAVA
+ */
 public class comehome {
     Map<Character, Collection<Node>> adjL;
     char pasture;
@@ -151,35 +147,3 @@ class Node implements Comparable<Node> {
         return "Node [v=" + v + ", distance=" + distance + "]";
     }
 }
-
-class FastScanner implements Closeable {
-    private final BufferedReader reader;
-    private StringTokenizer tokenizer;
-
-    public FastScanner(String filename) throws IOException {
-        reader = new BufferedReader(new FileReader(filename));
-        tokenizer = new StringTokenizer("");
-    }
-
-    public String next() throws IOException {
-        while (!tokenizer.hasMoreTokens()) {
-            tokenizer = new StringTokenizer(reader.readLine());
-        }
-        return tokenizer.nextToken();
-    }
-
-    public int nextInt() throws IOException {
-        return Integer.parseInt(next());
-    }
-
-
-    public double nextDouble() throws IOException {
-        return Double.parseDouble(next());
-    }
-
-    @Override
-    public void close() throws IOException {
-        reader.close();
-    }
-}
-

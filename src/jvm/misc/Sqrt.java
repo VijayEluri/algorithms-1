@@ -1,7 +1,7 @@
 package misc;
 
 public class Sqrt {
-  static final double EPSILON = 0.00000000000000000001;
+  static final double EPSILON = 0.00001;
   double x;
 
   public double sqrt(double _x) {
@@ -27,6 +27,6 @@ public class Sqrt {
   }
 
   public static void main(String[] _) {
-    System.out.println(new Sqrt().sqrt(10000000000000L));
+    System.out.println(new Sqrt().sqrt(16l));
   }
 }

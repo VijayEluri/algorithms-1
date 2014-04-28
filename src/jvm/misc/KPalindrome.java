@@ -1,8 +1,6 @@
 package misc;
 
 /**
- * facebook-interview-questions 15 of 15 votes 59 Answers
- * 
  * A k-palindrome is a string which transforms into a palindrome on removing at most k characters.
  * 
  * Given a string S, and an interger K, print "YES" if S is a k-palindrome; otherwise print "NO".

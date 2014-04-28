@@ -127,7 +127,7 @@ public class FillMatrix {
     }
 
     public static void main(String[] args) {
-        final int r = 19, c = 19;
+        final int r = 3, c = 5;
         final int[][] m = FillMatrix.fill(r, c);
         for (int i = 0; i < r; i++) {
             for (int j = 0; j < c; j++) {
