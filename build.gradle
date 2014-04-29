@@ -1,0 +1,17 @@
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'java'
+
+repositories {
+  mavenLocal()
+  mavenCentral()
+}
+
+artifacts {
+  jar
+}
+
+task testJar(type: Jar) {
+  classifier = 'tests'
+  from sourceSets.test.output
+}
