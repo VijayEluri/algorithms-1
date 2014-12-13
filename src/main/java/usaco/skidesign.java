@@ -62,9 +62,9 @@ public class skidesign {
     return m;
   }
 
-  private static int max(int[] elevations) {
+  private static int max(int[] xs) {
     int m = -1;
-    for (int elevation : elevations) {
+    for (int elevation : xs) {
       if (elevation > m) {
         m = elevation;
       }
