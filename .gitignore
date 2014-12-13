@@ -14,5 +14,3 @@ bin/
 build/
 target/
 test-output/
-*.in
-*.out
