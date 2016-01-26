@@ -6,6 +6,7 @@ import java.util.Collection;
 
 
 public class Seagrp {
+    int i = 0;
   public static void main(String[] args)
       throws IOException {
     final FastScanner s = new FastScanner(System.in);
@@ -32,7 +33,7 @@ public class Seagrp {
     return true;
   }
 
-  private static int dfs(boolean[][] graph, int start, boolean[] visited) {
+    private static int dfs(boolean[][] graph, int start, boolean[] visited,) {
     visited[start] = true;
     int cnt = 1;
     for (final int n : neighbors(graph, start)) {
@@ -40,6 +41,7 @@ public class Seagrp {
         cnt += dfs(graph, n, visited);
       }
     }
+    finish[start] = i++;
     return cnt;
   }
 

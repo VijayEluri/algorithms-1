@@ -4,7 +4,8 @@ public class ClosestSum {
   /* given an array of numbers and a value S, find a sum s 
    * (by summing a subset of the numbers) which is nearest
    *  to S.
-   */ int[][] s;
+   */
+  int[][] s;
   int[] nos;
 
   public int closestSum(int[] _nos, int S) {

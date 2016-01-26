@@ -61,14 +61,14 @@ public class AnagramsList {
   public static void main(String[] args) {
     System.out.println(new Anagram("abc").equals(new Anagram("bac")));
 
-    final Map<Anagram, List<String>> anagrams = new HashMap<Anagram, List<String>>();
-    for (final String s : new String[]{"cab", "cz", "abc", "bca", "zc"}) {
+    final Map<Anagram, List<String>> anagramMap = new HashMap<Anagram, List<String>>();
+    for (final String str : new String[]{"cab", "cz", "abc", "bca", "zc"}) {
       final Anagram a = new Anagram(s);
-      List<String> values = anagrams.get(a);
+      List<String> values = anagramMap.get(a);
       if (values == null) {
-        anagrams.put(a, values = new ArrayList<String>());
+        anagramMap.put(a, values = new ArrayList<String>());
       }
-      values.add(s);
+      values.add(str);
     }
 
     System.out.println(anagrams.values());

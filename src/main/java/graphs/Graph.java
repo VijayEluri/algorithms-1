@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Set;
+import sun.security.provider.certpath.Vertex;
 
 
 public class Graph {
@@ -59,6 +60,32 @@ class GraphMethods {
     if (v.d > u.d + w) {
       v.d = u.d + w;
       v.p = u;
+    }
+  }
+
+  Graph clone(Graph g) {
+    Map<Vertex, Vertex> m;
+    Graph gclone = new Graph();
+    for (Vertex v : g.allNodes()) {
+      if (!m.containsKey(v)) {
+        Vertex c = clone(v);
+        m.put(v, c);
+        gclone.addVertex(c);
+        dfs(v, c, gclone, m);
+      }
+    }
+  }
+
+  void dfs(Vertex v, Vertex c, Graph gclone, Map<Vertex, Vertex> m) {
+    for (Vertex nbr : neighbros(v)) {
+      if (!m.containsKey(nbr)) {
+        Vertex cclone = clone(nbr);
+        m.put(nbr, cclone);
+        gclone.addEdge(c, cclone);
+        dfs(nbr, cclone);
+      } else {
+        gclone.addEdge(c, m.get(nbr));
+      }
     }
   }
 }
