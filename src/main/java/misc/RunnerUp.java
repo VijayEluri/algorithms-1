@@ -1,9 +1,10 @@
 package misc;
 
+/*
 interface Node {
   Node r();
-
   Node l();
+  int val();
 }
 
 public class RunnerUp {
@@ -39,10 +40,19 @@ public class RunnerUp {
       if (b == null) return a;
 
       else {
-        return new Node(min(a, b).val, min(a, b), max(a, b));
+        return new Node(min(a, b).val(), min(a, b), max(a, b));
       }
 
     }
     return null;
   }
+
+  private Node max(Node a, Node b) {
+    return null;
+  }
+
+  private Node min(Node a, Node b) {
+    return null;
+  }
 }
+*/

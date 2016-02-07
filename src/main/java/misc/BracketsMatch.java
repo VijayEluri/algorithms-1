@@ -12,7 +12,7 @@ public class BracketsMatch {
     if (s == null || s.length() == 0) {
       return true;
     }
-    Stack<Character> stack = new Stack<>();
+    Stack<Character> stack = new Stack<Character>();
     for (char c : s.toCharArray()) {
       if (c == '[' || c == '(' || c == '{') {
         stack.push(c);

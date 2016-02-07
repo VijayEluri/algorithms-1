@@ -63,7 +63,7 @@ public class AnagramsList {
 
     final Map<Anagram, List<String>> anagramMap = new HashMap<Anagram, List<String>>();
     for (final String str : new String[]{"cab", "cz", "abc", "bca", "zc"}) {
-      final Anagram a = new Anagram(s);
+      final Anagram a = new Anagram(str);
       List<String> values = anagramMap.get(a);
       if (values == null) {
         anagramMap.put(a, values = new ArrayList<String>());
@@ -71,6 +71,6 @@ public class AnagramsList {
       values.add(str);
     }
 
-    System.out.println(anagrams.values());
+    System.out.println(anagramMap.values());
   }
 }
