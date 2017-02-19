@@ -4,7 +4,7 @@ TASK: inflate
 LANG: JAVA
 */
 
-package usaco;
+//package usaco;
 
 import java.io.BufferedWriter;
 import java.io.File;
