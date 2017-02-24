@@ -1,7 +1,7 @@
 package usaco;
 
 /*
- * ID: rdsr.me1 PROG: ride LANG: JAVA
+ID: rdsr.me1 PROG: ride LANG: JAVA
  */
 
 import java.io.BufferedReader;
