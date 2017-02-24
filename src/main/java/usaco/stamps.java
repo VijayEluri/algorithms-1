@@ -1,9 +1,9 @@
 package usaco;
 
 /**
- * ID: rdsr.me1
- * PROB: stamps
- * LANG: JAVA
+ID: rdsr.me1
+PROB: stamps
+LANG: JAVA
  */
 
 import java.io.*;
@@ -53,9 +53,6 @@ public class stamps {
   // stamp denominations
   private int[] denoms;
 
-  private int maxNoOfStamps;
-  private int maxDenom;
-
   public static void main(String[] args) throws IOException {
     final Scanner in = new Scanner(new File("stamps.in"));
     stamps s = new stamps();
@@ -65,8 +62,6 @@ public class stamps {
     for (int i = 0; i < s.n; i++) {
       s.denoms[i] = in.nextInt();
     }
-    s.maxDenom = 10000;
-    s.maxNoOfStamps = 200;
 
     final PrintWriter pw = new PrintWriter(
         new BufferedWriter(new FileWriter("stamps.out")));
@@ -76,28 +71,38 @@ public class stamps {
 
   long solve() {
     int maxPostage = k * max(denoms);
-    boolean[][] c = new boolean[maxPostage + 1][k + 1];
-    c[0][0] = true;
-   gi for (int d : denoms) {
-      c[d][1] = true;
-    }
 
-    long maxP = -1;
-    for (int p = 1; p <= maxPostage; p++) {
-      boolean done = false;
-      for (int i = 0; i < n  && !done; i++) {
-        int v = denoms[i];
-        if (p >= v) {
-          for (int j = k; j >= 1 && !done; j--) {
-            done = c[p][j] = c[p - v][j - 1];
-          }
+    // s[i] = min no. of stamps required to construct postage of value i
+    int[] s = new int[maxPostage + 1];
+    s[0] = 0;
+    for (int d : denoms) {
+      // min num. of stamps required to construct postage is equal to the stamp denomination is 1
+      s[d] = 1;
+    }
+    // algorithm
+    // if s[i] holds min no. of stamps to compute postage 'i'
+    // then to compute s[i] we can take the min of (s[i - d(j)] + 1, s[i]) for d(j) belongs to denoms
+    // This work since s[i - d(j)] holds min. of of stamps to compute postage i - d(j) , and postage
+    // i can only be constructed by adding one of the denominations to i - d(j). We pick that denomination
+    // which uses the minimum no. of stamps
+
+    // after computing no. of stamps for postage i, we verify if the number of
+    // stamps used is greater than k, in which case we break the loop and return
+    // i-1 .
+
+    for (int i = 1; i <= maxPostage; i++) {
+      // we don't want default of 0, since we use this value to compute min, see below
+      s[i] = k + 1;
+      for (int d : denoms) {
+        if (i >= d) {
+          s[i] = Math.min(s[i - d] + 1, s[i]);
         }
       }
-      if (done) {
-        maxP = p;
+      if (s[i] > k) {
+        return i - 1;
       }
     }
-    return maxP;
+    return maxPostage;
   }
 
   private int max(int[] denoms) {
